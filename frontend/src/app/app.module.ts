@@ -7,6 +7,7 @@ import { ProfilDeveloperComponent } from './profil-developer/profil-developer.co
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { FreelanceRegistrationComponent } from './freelance-registration/freelance-registration.component';
 import { CompanyRegistrationComponent } from './company-registration/company-registration.component';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CompanyRegistrationComponent } from './company-registration/company-reg
     ProfilDeveloperComponent,
     AuthentificationComponent,
     FreelanceRegistrationComponent,
-    CompanyRegistrationComponent
+    CompanyRegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule
