@@ -1,6 +1,5 @@
-const express = require('express');
-const http = require('http');
-const app = require('./app');
+import { createServer } from 'http';
+import app  from './app';
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
@@ -40,6 +39,6 @@ const onError = error => {
 const port = normalizePort(process.env.PORT || 3000);
 app.set('port',port)
  
-const server = http.createServer(app);
+const server = createServer(app);
 server.on('error', onError);
 server.listen(port)
