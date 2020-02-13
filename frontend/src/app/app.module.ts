@@ -10,6 +10,18 @@ import { CompanyRegistrationComponent } from './company-registration/company-reg
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import { RouterModule, Routes }   from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { EmailInputComponent } from './email-input/email-input.component';
+import {MatInputModule} from '@angular/material/input';
+
+const routes: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'login', component: AuthentificationComponent },
+];
 
 @NgModule({
   declarations: [
@@ -21,12 +33,20 @@ import { HeaderComponent } from './header/header.component';
     ProfilDeveloperComponent,
     AuthentificationComponent,
     FreelanceRegistrationComponent,
-    CompanyRegistrationComponent
+    CompanyRegistrationComponent,
+    EmailInputComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+    MatSliderModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
