@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatSliderModule } from "@angular/material/slider";
 import { AppComponent } from './app.component';
 import { SearchProfilComponent } from './search-profil/search-profil.component';
 import { ProfilDeveloperComponent } from './profil-developer/profil-developer.component';
@@ -27,7 +26,6 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
