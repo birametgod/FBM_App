@@ -1,0 +1,23 @@
+<mat-card id="search-card">
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
+        <mat-form-field class="search-techno">
+            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une techno</mat-label>
+            <input matInput placeholder="Ex. Node JS" formControlName="techno" [formControl]="technosControl" [matAutocomplete]="autoTechno">
+            <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete">
+                <mat-option *ngFor="let techno of technosFilteredOptions | async" [value]="techno">
+                    {{techno}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="search-city">
+            <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Rechercher une ville</mat-label>
+            <input matInput placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="autoCity">
+            <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
+                <mat-option *ngFor="let city of citiesFilteredOptions | async" [value]="city">
+                    {{city}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit" >Rechercher</button>
+    </form>
+</mat-card>

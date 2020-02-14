@@ -16,6 +16,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
 import { MatInputModule } from '@angular/material/input';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -40,6 +44,8 @@ const routes: Routes = [
     FreelanceRegistrationComponent,
     CompanyRegistrationComponent,
     EmailInputComponent,
+    SearchbarComponent,
+    EmailInputComponent,
     LoginComponent
   ],
   imports: [
@@ -55,7 +61,13 @@ const routes: Routes = [
     FlexLayoutModule,
     MatCardModule,
     MatGridListModule,
-    MatChipsModule
+    MatChipsModule,
+    FlexLayoutModule,
+    MatInputModule,
+    MatIconModule,
+    MatDividerModule,
+    MatCardModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
