@@ -21,9 +21,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { LoginComponent } from './login/login.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: AuthentificationComponent },
 ];
 
@@ -39,6 +42,8 @@ const routes: Routes = [
     CompanyRegistrationComponent,
     EmailInputComponent,
     SearchbarComponent
+    EmailInputComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule
     MatInputModule,
     MatIconModule,
     MatDividerModule,

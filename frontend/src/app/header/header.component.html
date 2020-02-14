@@ -1,5 +1,30 @@
-<mat-toolbar>
-    <a routerLink="/" routerLinkActive="active">SuperMalt</a>
-    <span class="example-fill-remaining-space"></span>
-    <a mat-button routerLink="/login" routerLinkActive="active">Connexion</a>
-</mat-toolbar>
+    <div class="example-container" fxLayout="row" fxLayoutAlign="end"
+    [class.mat-elevation-z2]="!isActive">
+
+      <!-- <ng-container >
+        <span>
+            <a mat-button routerLink="/create" routerLinkActive="mat-accent">new Post</a>
+          </span>
+          <span>
+            <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Logout</a>
+          </span>
+          <span
+            ><a mat-button routerLink="/station" routerLinkActive="router-link-active" routerLinkActive="mat-accent">
+              Rechercher une Station
+            </a></span>
+      </ng-container> -->
+      <ng-container >
+        <span>
+            <button mat-flat-button color="primary">Je suis freelance</button>
+            <!-- <a mat-flat-button routerLink="/signup" routerLinkActive="mat-accent">Je suis freelance</a> -->
+          </span>
+        <span>
+            <a mat-button routerLink="/login">M'inscrire</a>
+          </span>
+          <span>
+            <a mat-button routerLink="/signup">Me connecter</a>
+          </span>
+      </ng-container>      
+</div>
+  <br />
+  
