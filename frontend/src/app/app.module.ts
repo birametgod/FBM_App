@@ -33,7 +33,6 @@ const routes: Routes = [
     FreelanceRegistrationComponent,
     CompanyRegistrationComponent,
     EmailInputComponent
-    CompanyRegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +40,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    MatSliderModule,
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
