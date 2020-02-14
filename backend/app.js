@@ -2,6 +2,7 @@ import express from 'express';
 const app = express();
 import { connect } from 'mongoose';
 import userRoutes from './routes/user';
+import cityRoutes from './routes/city';
 import * as bodyParser  from "body-parser";
 
 connect('mongodb+srv://birametgod:JYhW2K6qkOAjAGAk@cluster0-c7tiq.mongodb.net/superMalt', {
@@ -27,5 +28,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
   });
 
 app.use("/api/user", userRoutes);
+app.use("/api/city", cityRoutes);
 
 export default app;
