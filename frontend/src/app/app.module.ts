@@ -17,7 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
 import {MatInputModule} from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
-//import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 const routes: Routes = [
@@ -48,7 +48,7 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    //FlexLayoutModule
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
