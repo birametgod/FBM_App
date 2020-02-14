@@ -41,7 +41,7 @@ const routes: Routes = [
     FreelanceRegistrationComponent,
     CompanyRegistrationComponent,
     EmailInputComponent,
-    SearchbarComponent
+    SearchbarComponent,
     EmailInputComponent,
     LoginComponent
   ],
@@ -55,7 +55,7 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
     MatInputModule,
     MatIconModule,
     MatDividerModule,
