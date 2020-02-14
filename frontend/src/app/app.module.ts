@@ -16,6 +16,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
 import {MatInputModule} from '@angular/material/input';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -32,7 +37,8 @@ const routes: Routes = [
     AuthentificationComponent,
     FreelanceRegistrationComponent,
     CompanyRegistrationComponent,
-    EmailInputComponent
+    EmailInputComponent,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,11 @@ const routes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatDividerModule,
+    MatCardModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
