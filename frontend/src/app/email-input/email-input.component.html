@@ -1,0 +1,23 @@
+<mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+            placeholder="Ex. pat@example.com">
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Veuillez entrer un email valide
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email <strong>requis</strong>
+    </mat-error>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Mot de Passe</mat-label>
+    <input matInput type="password" [formControl]="passwordFormControl" [errorStateMatcher]="matcher">
+    <mat-hint></mat-hint>
+    <mat-error *ngIf="passwordFormControl.hasError('email') && !passwordFormControl.hasError('required')">
+        Veuillez entrer un mot de passe valide
+    </mat-error>
+    <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Mot de passe <strong>requis</strong>
+    </mat-error>
+</mat-form-field>
