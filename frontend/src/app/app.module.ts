@@ -6,7 +6,6 @@ import { ProfilDeveloperComponent } from './profil-developer/profil-developer.co
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { FreelanceRegistrationComponent } from './freelance-registration/freelance-registration.component';
 import { CompanyRegistrationComponent } from './company-registration/company-registration.component';
-import {LoginComponent} from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,7 +20,6 @@ import { HeaderComponent } from './header/header.component';
     AuthentificationComponent,
     FreelanceRegistrationComponent,
     CompanyRegistrationComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
