@@ -9,25 +9,28 @@ import { CompanyRegistrationComponent } from './company-registration/company-reg
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes }   from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatCardModule} from '@angular/material/card';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: AuthentificationComponent },
+  { path: 'search', component: SearchProfilComponent },
 ];
 
 @NgModule({
@@ -55,6 +58,10 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatGridListModule,
+    MatChipsModule,
     FlexLayoutModule,
     MatInputModule,
     MatIconModule,
