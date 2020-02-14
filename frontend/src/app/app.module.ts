@@ -16,9 +16,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
 import {MatInputModule} from '@angular/material/input';
+import { LoginComponent } from './login/login.component';
+//import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: AuthentificationComponent },
 ];
 
@@ -32,7 +35,8 @@ const routes: Routes = [
     AuthentificationComponent,
     FreelanceRegistrationComponent,
     CompanyRegistrationComponent,
-    EmailInputComponent
+    EmailInputComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    //FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
