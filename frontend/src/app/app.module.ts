@@ -21,8 +21,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: AuthentificationComponent },
+  { path: '', component: AuthentificationComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
