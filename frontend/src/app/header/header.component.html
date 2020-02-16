@@ -1,19 +1,15 @@
     <div class="example-container" fxLayout="row" fxLayoutAlign="end"
     [class.mat-elevation-z2]="isActive">
 
-      <!-- <ng-container >
+      <ng-container *ngIf="isAuthenticate">
+        <span  fxFlex="95" >
+          <a mat-flat-button routerLink="/" >SUPER MALT</a> 
+        </span >
         <span>
-            <a mat-button routerLink="/create" routerLinkActive="mat-accent">new Post</a>
-          </span>
-          <span>
-            <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Logout</a>
-          </span>
-          <span
-            ><a mat-button routerLink="/station" routerLinkActive="router-link-active" routerLinkActive="mat-accent">
-              Rechercher une Station
-            </a></span>
-      </ng-container> -->
-      <ng-container >
+          <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Logout</a>
+        </span>
+      </ng-container>
+      <ng-container  *ngIf="!isAuthenticate">
           <span  fxFlex="75" >
             <a mat-flat-button routerLink="/" >SUPER MALT</a> 
           </span >
@@ -22,7 +18,7 @@
             <!-- <a mat-flat-button routerLink="/signup" routerLinkActive="mat-accent">Je suis freelance</a> -->
           </span>
         <span>
-            <a mat-button routerLink="/login">M'inscrire</a>
+            <a mat-button routerLink="/signUp">M'inscrire</a>
           </span>
           <span>
             <a mat-button routerLink="/login">Me connecter</a>

@@ -26,11 +26,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 
 const routes: Routes = [
   { path: '', component: AuthentificationComponent },
+  { path: 'signUp', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
   { path: 'profil', component: ProfilDeveloperComponent },
@@ -49,7 +51,8 @@ const routes: Routes = [
     EmailInputComponent,
     SearchbarComponent,
     EmailInputComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

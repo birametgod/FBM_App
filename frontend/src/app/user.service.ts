@@ -39,8 +39,9 @@ export class UserService {
       email: email,
       password: password
     };
-    this.http.post<{ message: string; result: User }>('http://localhost:3000/api/signup', user).subscribe(
+    this.http.post<{ message: string; result: User }>('http://localhost:3000/api/user/signUp', user).subscribe(
       res => {
+        console.log(res);
         this.route.navigate(['/']);
       },
       error => {
@@ -63,7 +64,7 @@ export class UserService {
           if (res.token) {
             this.setTimer(res.expiresIn);
           }
-          this.idUser = res.user._id;
+          this.idUser = res.user;
           const now = new Date();
           const expireDate = new Date(now.getTime() + res.expiresIn * 1000);
           this.saveAuthData(res.token, expireDate);
@@ -78,9 +79,9 @@ export class UserService {
   }
 
   private saveAuthData(token: string, expirationDate: Date) {
-    //localStorage.setItem('token', token);
-    //localStorage.setItem('expirationDate', expirationDate.toISOString());
-    //localStorage.setItem('userId', this.idUser);
+    localStorage.setItem('token', token);
+    localStorage.setItem('expirationDate', expirationDate.toISOString());
+    localStorage.setItem('userId', this.idUser);
   }
 
   autoUserAuth() {

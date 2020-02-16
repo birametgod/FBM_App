@@ -18,7 +18,7 @@ export function signUp(req, res, next) {
         // return response if user created
           return res.status(200).json({
             message: 'user created',
-            result: result
+            result: result._id
           });
         })
         .catch(error => {
@@ -69,8 +69,9 @@ export function loginUser(req,res,next) {
 
             return res.status(200).json({
               message: 'Auth good',
-              user: userFetched,
+              user: userFetched._id,
               token: token,
+              expiresIn: 3600
             }); 
         })
 
