@@ -25,11 +25,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: AuthentificationComponent },
+  { path: '', component: AuthentificationComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
   { path: 'profil', component: ProfilDeveloperComponent },
 ];
@@ -58,16 +60,14 @@ const routes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule,
     FlexLayoutModule,
+    HttpClientModule,
     MatCardModule,
     MatGridListModule,
     MatChipsModule,
-    FlexLayoutModule,
     MatInputModule,
     MatIconModule,
     MatDividerModule,
-    MatCardModule,
     MatAutocompleteModule
   ],
   providers: [],

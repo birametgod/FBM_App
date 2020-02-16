@@ -1,5 +1,5 @@
     <div class="example-container" fxLayout="row" fxLayoutAlign="end"
-    [class.mat-elevation-z2]="!isActive">
+    [class.mat-elevation-z2]="isActive">
 
       <!-- <ng-container >
         <span>
@@ -14,6 +14,9 @@
             </a></span>
       </ng-container> -->
       <ng-container >
+          <span  fxFlex="75" >
+            <a mat-flat-button routerLink="/signup" routerLinkActive="mat-accent">SUPER MALT</a> 
+          </span >
         <span>
             <button mat-flat-button color="primary">Je suis freelance</button>
             <!-- <a mat-flat-button routerLink="/signup" routerLinkActive="mat-accent">Je suis freelance</a> -->
