@@ -56,15 +56,22 @@ export function loginUser(req,res,next) {
 
             if(err) {
                 return res.status(401).json({
-                  message: 'password not correct'
+                  message: 'password not correct',
+                  err: err
                 });
             }
 
-                return res.status(200).json({
-                  message: 'Auth good',
-                  user: userFetched,
-                  token: token,
-                });
+            if (!result) {
+              return res.status(401).json({
+                message: 'password not correct',
+              });             
+            }
+
+            return res.status(200).json({
+              message: 'Auth good',
+              user: userFetched,
+              token: token,
+            }); 
         })
 
     })
