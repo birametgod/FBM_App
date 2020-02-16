@@ -1,0 +1,15 @@
+#search-card{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.search-form{
+    width: 100%;
+    display: flex;
+    max-height: 50px;
+}
+
+mat-form-field{
+    flex: 1;
+    padding: 10px;
+}
