@@ -25,8 +25,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatChipsModule } from '@angular/material/chips';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthGuard } from './auth.guard';
 
 
 
@@ -35,7 +37,7 @@ const routes: Routes = [
   { path: 'signUp', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
-  { path: 'profil', component: ProfilDeveloperComponent },
+  { path: 'profil', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -73,7 +75,10 @@ const routes: Routes = [
     MatDividerModule,
     MatAutocompleteModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

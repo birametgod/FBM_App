@@ -1,14 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
         <div>
-            <app-email-input></app-email-input>
+            <app-searchbar></app-searchbar>
         </div>
-    
-        <!--<div>
-            <label for="password">
-                Mot de passe
-            </label>
-            <input id="password" type="password" formControlName="password">
-        </div>-->
 
-    <button class="button" type="submit">Connexion</button>
 </form>
