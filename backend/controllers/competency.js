@@ -1,6 +1,7 @@
 import Competency from '../models/competency';
 
-export function getCompetencies(req,res) {
+export function getCompetencies(req,res,next) {
+
     Competency.find((err, result) => {
         if (err) {
             return res.status(500).json({
@@ -9,4 +10,5 @@ export function getCompetencies(req,res) {
         }
         return res.status(200).json(result);
     });
+    
 }
