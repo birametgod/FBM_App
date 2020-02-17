@@ -1,0 +1,18 @@
+.center {
+    position: fixed;
+    width: 100%;
+    height: 200px;
+    top: 50%;
+    /* left: 50%; */
+    margin-top: -100px; /* Negative half of height. */
+    /* margin-left: -250px; */
+  }
+
+  .view {
+    height: 100vh !important;
+    background-image: url('/assets/images/freelance.jpeg');
+    width: 100vw;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }

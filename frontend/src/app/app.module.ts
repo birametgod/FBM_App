@@ -29,11 +29,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
+import { MDBBootstrapModule } from "angular-bootstrap-md";
+import { HomeComponent } from './home/home.component';
 
 
 
 const routes: Routes = [
-  { path: '', component: AuthentificationComponent },
+  { path: '', component: HomeComponent },
   { path: 'signUp', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
@@ -54,7 +56,8 @@ const routes: Routes = [
     SearchbarComponent,
     EmailInputComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     MatDividerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
