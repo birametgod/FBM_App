@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { getCompetencies } from '../controllers/competency';
+import * as competency from '../controllers/competency';
+import * as authorize from '../middleware/check-auth';
 
 const router = Router();
 
-router.get("/",getCompetencies);
+router.get("/", authorize.checkAuth(),competency.getCompetencies);
+router.post("/", authorize.checkAuth('Admin'),competency.createCompetencies)
 
 export default router;

@@ -1,10 +1,14 @@
 import { Router } from 'express';
-import { getUser, loginUser, signUp } from '../controllers/user';
+import * as userController from '../controllers/user';
+import * as authorize from '../middleware/check-auth';
+
 
 const router = Router();
 
-router.post("/login", loginUser);
-router.post("/signUp", signUp);
-router.get("/",getUser);
+router.post("/login",userController.loginUser);
+router.post("/signUp", userController.signUp);
+router.get("/",userController.getUserBySimpleUser);
+router.get("/admin",authorize.checkAuth('Admin'), userController.getUser);
+
 
 export default router;
