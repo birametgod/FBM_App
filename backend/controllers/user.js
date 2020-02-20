@@ -8,7 +8,10 @@ export function signUp(req, res, next) {
     // if i get error when i hash my password
     const user = new User({
       email: req.body.email,
-      password: hashPassword
+      password: hashPassword,
+      location:req.body.cityId ,
+      competencies: req.body.competenciesId,
+      role: req.body.role
     });
 
     // create my user
@@ -78,6 +81,30 @@ export function loginUser(req, res, next) {
   })
 }
 
+export function getUserByTag(req,res,next) {
+  const locationId = req.query.locationId;
+  const competenciesId = req.query.competenciesId;
+  User.
+    find({ location : locationId, competencies : {$in : competenciesId}}).
+    populate('location').
+    populate('competencies').
+    exec((err,users) => {
+      if(err) return res.status(500).json({message: err.message});
+       const userFetched = users.map(user => {
+         const userFormat = {
+          competencies : user.competencies,
+          id: user._id,
+          email: user.email,
+          password: user.password,
+          location: user.location.name,
+          role: user.role,
+         }
+         return userFormat;
+       })
+      return res.status(200).json(userFetched);
+    })
+}
+
 export function getUser(req, res, next) {
   User.find((err, result) => {
     if (err) {
@@ -101,7 +128,9 @@ export function getUserBySimpleUser(req, res, next) {
       const userMap = {
         id: res._id,
         email: res.email,
-        role: res.role
+        role: res.role,
+        competencies: res.competencies,
+        location: res.location
       };
       return userMap;
     });

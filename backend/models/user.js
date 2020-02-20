@@ -10,7 +10,8 @@ const userSchema = Schema({
     file: String,
     picture: String,
     isConnected: Boolean,
-    location:String,
+    location:{type: Schema.Types.ObjectId, ref: 'City' },
+    competencies: [{type: Schema.Types.ObjectId, ref: 'Competency' }]
 });
 
 userSchema.plugin(uniqueValidator);
