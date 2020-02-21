@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CityService } from '../city.service';
 import { CompetencyService } from '../competency.service';
 
@@ -20,15 +20,15 @@ export class ProfilDeveloperComponent implements OnInit {
     private competencyService: CompetencyService,
     private formBuilder: FormBuilder) {
     this.registrationForm = this.formBuilder.group({
-      firstname: '',
-      lastname: '',
-      email: '',
-      phoneNumber: '',
+      firstname: new FormControl(null, { validators: [Validators.required] }),
+      lastname: new FormControl(null, { validators: [Validators.required] }),
+      email: new FormControl(null, { validators: [Validators.required, Validators.email] }),
+      phoneNumber:new FormControl(null, { validators: [Validators.required, Validators.pattern("^(6|7)?[0-9]{8}$")] }),
       picture: '',
       location: null,
       competencies: [],
-      password: '',
-      confirmationPassword: ''
+      password: new FormControl(null, { validators: [Validators.required, Validators.minLength(6)] }),
+      confirmationPassword: new FormControl(null, { validators: [Validators.required, Validators.minLength(6)] })
     });
   }
 
@@ -38,6 +38,9 @@ export class ProfilDeveloperComponent implements OnInit {
   }
 
   onSubmit(freelanceData) {
+    if (this.registrationForm.invalid) {
+      return;
+    }
     if(freelanceData.password == freelanceData.confirmationPassword)
     {
       var formData: any = new FormData();
