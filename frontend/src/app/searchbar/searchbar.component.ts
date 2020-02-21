@@ -7,6 +7,7 @@ import { Competency } from '../competency';
 import { CityService } from '../city.service';
 import { CompetencyService } from '../competency.service';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-searchbar',
@@ -22,7 +23,10 @@ export class SearchbarComponent implements OnInit {
   citiesFilteredOptions: City[];
   technosFilteredOptions: Competency[];
 
-  constructor(private cityService: CityService, private competencyService: CompetencyService, private userService: UserService ) {}
+  constructor(
+    private cityService: CityService,
+    private competencyService: CompetencyService,
+    private route: Router ) {}
 
 
   ngOnInit() {
@@ -42,8 +46,6 @@ export class SearchbarComponent implements OnInit {
   }
 
    citiesFilter(value:string): City[] {
-    console.log(value);
-    //const value = value.toLowerCase();
     return this.cities.filter(cityOption => cityOption.name.toLowerCase().indexOf(value) === 0);
   }
 
@@ -52,13 +54,10 @@ export class SearchbarComponent implements OnInit {
   }
   
   displayCompetencyName(competency: Competency): string {
-    console.log(competency);
     return competency && competency.name ? competency.name : '';
   }
 
   technosFilter(value:string): Competency[] {
-    //const filterValue = value.toLowerCase();
-    console.log(value);
     return this.competencies.filter(competencyOption => competencyOption.name.toLowerCase().indexOf(value) === 0);
   }
 
@@ -71,6 +70,6 @@ export class SearchbarComponent implements OnInit {
     if (!idTech || !idCity) {
       return;
     }
-    this.userService.getUserByTag(idTech,idCity)
+    this.route.navigate(['/search'], {queryParams: {competencieId:idTech,locationId:idCity}});
   }
 }

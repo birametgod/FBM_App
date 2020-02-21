@@ -32,6 +32,8 @@ import { AuthGuard } from './auth.guard';
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HomeComponent } from './home/home.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -80,7 +82,8 @@ const routes: Routes = [
     MatDividerModule,
     MatAutocompleteModule,
     MatSelectModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},

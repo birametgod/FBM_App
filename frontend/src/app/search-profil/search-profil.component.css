@@ -16,3 +16,7 @@
 .mat-grid-tile:hover { 
         background-color: black;
     }
+
+    mat-spinner {
+      margin: auto;
+    }

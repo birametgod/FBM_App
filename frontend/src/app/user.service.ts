@@ -37,15 +37,12 @@ export class UserService {
   }
 
   getUserByTag(competencyId: string, locationId: string)  {
-    const queryParams = `?locationId=${locationId}&competenciesId=${competencyId}`;
-    this.http.get<UserTag[]>('http://localhost:3000/api/user/userTag'+ queryParams).subscribe((values) => {
-      console.log(values);
+    const queryParamsRoute = `?locationId=${locationId}&competenciesId=${competencyId}`;
+    return this.http.get<UserTag[]>('http://localhost:3000/api/user/userTag'+ queryParamsRoute).subscribe((values) => {
       this.userTagUpdated.next(values);
-      this.route.navigate(['/search']);
     },error => {
       console.log(error);
     })
-
   }
 
   getUserTagUpdated() {
