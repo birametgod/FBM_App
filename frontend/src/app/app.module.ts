@@ -31,6 +31,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HomeComponent } from './home/home.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
   { path: 'profil', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
+  { path: 'developer/registration', component: ProfilDeveloperComponent },
 ];
 
 @NgModule({
@@ -77,6 +79,7 @@ const routes: Routes = [
     MatIconModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatSelectModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [
