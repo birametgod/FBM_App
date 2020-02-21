@@ -1,13 +1,27 @@
 import Competency from '../models/competency';
 
 export function getCompetencies(req,res,next) {
+    let competencies = [];
     Competency.find((err, result) => {
         if (err) {
             return res.status(500).json({
-            message: err
+            message: err.message
             });
         }
-        return res.status(200).json(result);
+        if (result) {
+            competencies = result.map( data => {
+                const dataTransformed = {
+                    id: data._id,
+                    name: data.name
+                }
+                return dataTransformed
+           })
+           return res.status(200).json(competencies);
+        }
+
+        return res.status(500).json({
+            message: 'not found'
+            });
     });
     
 }

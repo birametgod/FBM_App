@@ -4,7 +4,7 @@ import * as authorize from '../middleware/check-auth';
 
 const router = Router();
 
-router.get("/",authorize.checkAuth(),city.getCities); // all authenticated users
+router.get("/",city.getCities); // all authenticated users
 router.post("/", authorize.checkAuth('Admin'), city.createCity) //only admin
 
 export default router;
