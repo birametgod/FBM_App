@@ -1,27 +1,35 @@
 <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <form class="example-form">
+      <form class="example-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
-          <input matInput placeholder="Dupont" value="Nom">
+          <input matInput placeholder="Dupont" value="" formControlName="lastname" name="lastname" >
           <mat-icon matSuffix>mode_edit</mat-icon>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Prénom</mat-label>
-          <input matInput placeholder="Jean" value="Prénom">
+          <input matInput placeholder="Jean" value="" formControlName="firstname" name="firstname" >
           <mat-icon matSuffix>mode_edit</mat-icon>
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="jean.dupont@domaine.com" value="Email">
+            <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email" name="email" >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Telephone</mat-label>
-            <span matPrefix>+336 &nbsp;</span>
-            <input type="tel" matInput placeholder="03946429" value="03946429">
+            <span matPrefix>+33 &nbsp;</span>
+            <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber" name="phoneNumber" >
             <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Ville</mat-label>
+            <mat-select  name="location" >
+              <mat-option *ngFor="let city of cities | async" [value]="city._id">
+                  {{city.name}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
       </form>
     </mat-card-header>
