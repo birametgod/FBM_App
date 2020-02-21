@@ -3,6 +3,7 @@ import { User } from './user';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserTag } from './user-tag';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class UserService {
   isAuthenticate = false;
   private userAuthenticate = new Subject<boolean>();
   private myTimer: any;
+  private userTagUpdated = new Subject<UserTag[]>();
+
   
   constructor(private http: HttpClient, private route: Router) { }
 
@@ -31,6 +34,22 @@ export class UserService {
 
   getUserAuthenticateListener(): Observable<any> {
     return this.userAuthenticate.asObservable();
+  }
+
+  getUserByTag(competencyId: string, locationId: string)  {
+    const queryParams = `?locationId=${locationId}&competenciesId=${competencyId}`;
+    this.http.get<UserTag[]>('http://localhost:3000/api/user/userTag'+ queryParams).subscribe((values) => {
+      console.log(values);
+      this.userTagUpdated.next(values);
+      this.route.navigate(['/search']);
+    },error => {
+      console.log(error);
+    })
+
+  }
+
+  getUserTagUpdated() {
+    return this.userTagUpdated.asObservable();
   }
   
 

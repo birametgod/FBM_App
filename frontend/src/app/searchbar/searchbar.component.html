@@ -3,18 +3,18 @@
         <mat-form-field class="search-techno">
             <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une techno</mat-label>
             <input matInput placeholder="Ex. Node JS" formControlName="techno" [formControl]="technosControl" [matAutocomplete]="autoTechno">
-            <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete">
-                <mat-option *ngFor="let techno of technosFilteredOptions | async" [value]="techno">
-                    {{techno}}
+            <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete" [displayWith]="displayCompetencyName"> 
+                <mat-option *ngFor="let techno of technosFilteredOptions " [value]="techno">
+                    {{techno.name}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
         <mat-form-field class="search-city">
             <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Rechercher une ville</mat-label>
-            <input matInput placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="autoCity">
-            <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
-                <mat-option *ngFor="let city of citiesFilteredOptions | async" [value]="city">
-                    {{city}}
+            <input matInput type="input" placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="auto">
+            <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayCityName">
+                <mat-option *ngFor="let city of citiesFilteredOptions" [value]="city">
+                    {{city.name}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>

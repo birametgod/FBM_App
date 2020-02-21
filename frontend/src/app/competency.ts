@@ -1,4 +1,4 @@
 export class Competency {
-    id: String;
-    name: String;
+    id: string;
+    name: string;
 }
