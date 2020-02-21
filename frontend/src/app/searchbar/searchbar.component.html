@@ -1,8 +1,8 @@
 <div flex fxLayout="row">
     <mat-card id="search-card">
-    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)" style="width:600px !important">
         <mat-form-field class="search-techno">
-            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Technologie</mat-label>
+            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une technologie</mat-label> 
             <input matInput placeholder="Ex. Node JS" formControlName="techno" [formControl]="technosControl" [matAutocomplete]="autoTechno">
             <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete">
                 <mat-option *ngFor="let techno of technosFilteredOptions | async" [value]="techno">
@@ -12,7 +12,7 @@
         </mat-form-field>
         <br>
         <mat-form-field class="search-city">
-            <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Ville</mat-label>
+            <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Rechercher une ville</mat-label>
             <input matInput placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="autoCity">
             <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
                 <mat-option *ngFor="let city of citiesFilteredOptions | async" [value]="city">
@@ -20,7 +20,7 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit" ><mdb-icon fab fab icon="sistrix"></mdb-icon></button>
+        <button mat-raised-button color="accent" type="submit"><i class="fas fa-search"></i></button>
     </form>
 </mat-card>
 </div>
