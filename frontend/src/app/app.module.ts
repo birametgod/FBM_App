@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
   { path: 'profil', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
-  { path: 'developer/registration', component: ProfilDeveloperComponent },
+  { path: 'developer/registration', component: FreelanceRegistrationComponent },
 ];
 
 @NgModule({

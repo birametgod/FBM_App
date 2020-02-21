@@ -12,6 +12,8 @@ export class ProfilDeveloperComponent implements OnInit {
   cities;
   competencies;
   registrationForm;
+  citySelected: String;
+  competenciesSelected: String;
 
   constructor(
     private cityService: CityService,
@@ -24,6 +26,7 @@ export class ProfilDeveloperComponent implements OnInit {
       phoneNumber: '',
       picture: '',
       location: null,
+      competencies: [],
       password: '',
       confirmationPassword: ''
     });
@@ -35,8 +38,37 @@ export class ProfilDeveloperComponent implements OnInit {
   }
 
   onSubmit(freelanceData) {
-
-    console.warn('Your order has been submitted', freelanceData);
+    if(freelanceData.password == freelanceData.confirmationPassword)
+    {
+      var formData: any = new FormData();
+      formData.append("firstname", freelanceData.firstname);
+      formData.append("lastname", freelanceData.lastname);
+      formData.append("email", freelanceData.email);
+      formData.append("phoneNumber", freelanceData.phoneNumber);
+      formData.append("location", this.citySelected);
+      formData.append("competencies", this.competenciesSelected);
+      formData.append("picture", document.getElementById("pictureDeveloper").value);
+    }
+    else{
+      alert("Les mot de passe ne correspondent pas");
+    }
   }
 
+  changePicture() : void{
+    document.getElementById("pictureDeveloper").click();
+  }
+
+  readURL() {
+    var input = document.getElementById("pictureDeveloper");
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        document.getElementsByClassName("example-header-image")[0].style.backgroundImage = "url('" + e.target.result + "')";
+      }
+      
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  
 }
