@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CityService } from '../city.service';
 import { CompetencyService } from '../competency.service';
+import { City } from '../city';
+import { Observable } from 'rxjs';
+import { Competency } from '../competency';
 
 @Component({
   selector: 'app-profil-developer',
@@ -50,7 +53,7 @@ export class ProfilDeveloperComponent implements OnInit {
       formData.append("phoneNumber", freelanceData.phoneNumber);
       formData.append("location", this.citySelected);
       formData.append("competencies", this.competenciesSelected);
-      formData.append("picture", document.getElementById("pictureDeveloper").value);
+      //formData.append("picture", document.getElementById("pictureDeveloper").value);
     }
     else{
       alert("Les mot de passe ne correspondent pas");
@@ -62,16 +65,16 @@ export class ProfilDeveloperComponent implements OnInit {
   }
 
   readURL() {
-    var input = document.getElementById("pictureDeveloper");
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+    // var input = document.getElementById("pictureDeveloper");
+    // if (input.files && input.files[0]) {
+    //   var reader = new FileReader();
       
-      reader.onload = function(e) {
-        document.getElementsByClassName("example-header-image")[0].style.backgroundImage = "url('" + e.target.result + "')";
-      }
+    //   reader.onload = function(e) {
+    //     document.getElementsByClassName("example-header-image")[0].style.backgroundImage = "url('" + e.target.result + "')";
+    //   }
       
-      reader.readAsDataURL(input.files[0]);
-    }
+    //   reader.readAsDataURL(input.files[0]);
+    // }
   }
   
 }

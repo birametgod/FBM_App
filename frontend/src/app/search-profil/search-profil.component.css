@@ -10,3 +10,17 @@
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
+
+  .mat-grid-tile {
+    box-shadow: 1px 1px 1px rgb(184, 184, 184);
+    border: solid 0.1px rgb(184, 184, 184);
+    border-radius: 5px;
+    }
+
+.mat-grid-tile:hover { 
+        background-color: black;
+    }
+
+    mat-spinner {
+      margin: auto;
+    }

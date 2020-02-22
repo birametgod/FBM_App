@@ -2,7 +2,7 @@
     <mat-card-header >
       <div mat-card-avatar class="example-header-image" (click)="changePicture()" ></div>
       <form class="example-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
-          <input type='file' id="pictureDeveloper" name="pictureDeveloper" (change)="readURL()" formControlName="picture" accept="image/x-png,image/jpeg" />
+          <!-- <input type='file' id="pictureDeveloper" name="pictureDeveloper" (change)="readURL()" formControlName="picture" accept="image/x-png,image/jpeg" /> -->
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
           <input matInput placeholder="Dupont" value="" formControlName="lastname" name="lastname" >

@@ -1,14 +1,27 @@
 import City from '../models/city';
 
 export function getCities(req,res,next) {
-
+    let cities = [];
     City.find((err, result) => {
         if (err) {
             return res.status(500).json({
-            message: err
+            message: err.message
             });
         }
-        return res.status(200).json(result);
+        if (result) {
+            cities = result.map( data => {
+                const dataTransformed = {
+                    id: data._id,
+                    name: data.name
+                }
+                return dataTransformed
+           });
+           return res.status(200).json(cities);
+        }
+
+        return res.status(500).json({
+            message: 'not found'
+            });
     });
     
 }
