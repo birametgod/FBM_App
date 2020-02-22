@@ -17,9 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
 import { MatInputModule } from '@angular/material/input';
 import { SearchbarComponent } from './searchbar/searchbar.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
   { path: 'profil', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
-  { path: 'developer/registration', component: ProfilDeveloperComponent },
+  { path: 'registration', component: FreelanceRegistrationComponent },
 ];
 
 @NgModule({

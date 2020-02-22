@@ -1,7 +1,8 @@
-<mat-card id="search-card">
-    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
+<div flex fxLayout="row">
+    <mat-card id="search-card">
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)" style="width:600px !important">
         <mat-form-field class="search-techno">
-            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une techno</mat-label>
+            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une technologie</mat-label> 
             <input matInput placeholder="Ex. Node JS" formControlName="techno" [formControl]="technosControl" [matAutocomplete]="autoTechno">
             <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete" [displayWith]="displayCompetencyName"> 
                 <mat-option *ngFor="let techno of technosFilteredOptions " [value]="techno">
@@ -9,6 +10,7 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+        <br>
         <mat-form-field class="search-city">
             <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Rechercher une ville</mat-label>
             <input matInput type="input" placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="auto">
@@ -18,6 +20,7 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit" >Rechercher</button>
+        <button mat-raised-button color="accent" type="submit"><i class="fas fa-search"></i></button>
     </form>
 </mat-card>
+</div>

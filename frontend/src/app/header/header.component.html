@@ -6,7 +6,10 @@
           <a mat-flat-button routerLink="/" >SUPER MALT</a> 
         </span >
         <span>
-          <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Logout</a>
+            <a mat-button routerLinkActive="mat-accent" routerLink="/profil">Mon Profil</a>
+          </span>
+        <span>
+          <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Déconnexion</a>
         </span>
       </ng-container>
       <ng-container  *ngIf="!isAuthenticate">
@@ -14,7 +17,7 @@
             <a mat-flat-button routerLink="/" >SUPER MALT</a> 
           </span >
         <span>
-            <button mat-flat-button color="primary">Je suis freelance</button>
+            <button mat-flat-button color="primary" routerLink="/registration" >Je suis freelance</button>
             <!-- <a mat-flat-button routerLink="/signup" routerLinkActive="mat-accent">Je suis freelance</a> -->
           </span>
         <span>

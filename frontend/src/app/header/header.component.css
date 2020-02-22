@@ -1,4 +1,10 @@
   .example-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 16px;
     margin-bottom: 2px;
+    z-index: 1;
+    background-color: white;
   }

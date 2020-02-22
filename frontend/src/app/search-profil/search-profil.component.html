@@ -1,18 +1,20 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-grid-list cols="4" rowHeight="2:1" [gutterSize]="'25px'" *ngIf="users.length > 0 && !isLoading">
-    <mat-grid-tile *ngFor="let user of users">
-        <mat-card class="search-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{user.email}}</mat-card-title>
-              <mat-card-subtitle>{{user.role}}</mat-card-subtitle>
-              <mat-card-subtitle>{{user.location}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-chip-list aria-label="competence">
-                <mat-chip color="warn" selected *ngFor="let item of user.competencies" >{{item.name}}</mat-chip>
-              </mat-chip-list>
-            </mat-card> 
-    </mat-grid-tile>
-
-
-  </mat-grid-list>
+  <ng-container *ngIf="users.length > 0 && !isLoading" >
+    <mat-card class="search-card" *ngFor="let user of users">
+      <mat-card-header>
+        <div mat-card-avatar class="search-header-image"></div>
+        <mat-card-title>{{user.email}}</mat-card-title>
+        <mat-card-subtitle><i class="fas fa-briefcase"></i> {{user.role}} <i class="fas fa-map-marker-alt"> </i> {{user.location}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="">
+      <mat-card-content>
+        <mat-chip-list aria-label="competence">
+          <mat-chip color="warn" selected *ngFor="let item of user.competencies" >{{item.name}}</mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>AFFICHER</button>
+        <button mat-button>CONTACTER</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
