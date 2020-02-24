@@ -50,11 +50,7 @@ export class UserService {
   }
   
 
-  addUser(email: string, password: string) {
-    const user: User = {
-      email: email,
-      password: password
-    };
+  addUser(user:User) {
     this.http.post<{ message: string; result: User }>('http://localhost:3000/api/user/signUp', user).subscribe(
       res => {
         console.log(res);
@@ -67,7 +63,7 @@ export class UserService {
   }
 
   userLogin(email: string, password: string) {
-    const user: User = {
+    const user = {
       email: email,
       password: password
     };

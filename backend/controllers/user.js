@@ -11,7 +11,10 @@ export function signUp(req, res, next) {
       password: hashPassword,
       location:req.body.cityId ,
       competencies: req.body.competenciesId,
-      role: req.body.role
+      role: req.body.role,
+      phoneNumber: req.body.phoneNumber,
+      firstname :req.body.firstname,
+      lastname :req.body.lastname
     });
 
     // create my user

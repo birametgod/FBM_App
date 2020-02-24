@@ -1,41 +1,77 @@
 <mat-card class="example-card">
-    <mat-card-header >
-      <div mat-card-avatar class="example-header-image" (click)="changePicture()" ></div>
-      <form class="example-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
-          <!-- <input type='file' id="pictureDeveloper" name="pictureDeveloper" (change)="readURL()" formControlName="picture" accept="image/x-png,image/jpeg" /> -->
+  <mat-card-header *ngIf="role == 'User'" >
+    <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
+          <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
-          <input matInput placeholder="Dupont" value="" formControlName="lastname" name="lastname" >
-          <mat-icon matSuffix>mode_edit</mat-icon>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Prénom</mat-label>
-          <input matInput placeholder="Jean" value="" formControlName="firstname" name="firstname" >
+          <input matInput placeholder="Dupont" value="" formControlName="lastname"  >
           <mat-icon matSuffix>mode_edit</mat-icon>
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email" name="email" >
+            <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Telephone</mat-label>
             <span matPrefix>+33 &nbsp;</span>
-            <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber" name="phoneNumber" >
+            <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber"  >
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <div id="passwordDiv">
+            <mat-form-field class="example-full-width">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" placeholder="Mot de passe" formControlName="password"  >
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Confirmation mot de passe</mat-label>
+                <input matInput type="password" placeholder="Confirmation mot de passe" formControlName="confirmationPassword"  >
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+      </form>
+  </mat-card-header>
+
+    <mat-card-header *ngIf="role=='Freelance'" >
+      <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
+          <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
+        <mat-form-field class="example-full-width">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="Dupont" value="" formControlName="lastname"  >
+          <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Prénom</mat-label>
+          <input matInput placeholder="Jean" value="" formControlName="firstname"  >
+          <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email"  >
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Telephone</mat-label>
+            <span matPrefix>+33 &nbsp;</span>
+            <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Ville</mat-label>
-            <mat-select  name="location" id="location" [(value)]="citySelected" >
-              <mat-option *ngFor="let city of cities | async" [value]="city._id">
+            <mat-select formControlName="location"  id="location" [(value)]="citySelected" >
+              <mat-option *ngFor="let city of cities | async" [value]="city.id">
                   {{city.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width" >
             <mat-label>Compétences</mat-label>
-            <mat-select name="competencies" id="competencies" [(value)]="competenciesSelected" multiple>
-              <mat-option *ngFor="let competency of competencies | async" [value]="competency._id">
+            <mat-select  formControlName="competencies"  id="competencies" [(value)]="competenciesSelected" multiple>
+              <mat-option *ngFor="let competency of competencies | async" [value]="competency.id">
                 {{competency.name}}
               </mat-option>
             </mat-select>
@@ -43,16 +79,16 @@
           <div id="passwordDiv">
             <mat-form-field class="example-full-width">
                 <mat-label>Mot de passe</mat-label>
-                <input matInput type="password" placeholder="Mot de passe" formControlName="password" name="password" >
+                <input matInput type="password" placeholder="Mot de passe" formControlName="password"  >
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Confirmation mot de passe</mat-label>
-                <input matInput type="password" placeholder="Confirmation mot de passe" formControlName="confirmationPassword" name="confirmationPassword" >
+                <input matInput type="password" placeholder="Confirmation mot de passe" formControlName="confirmationPassword"  >
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
           </div>
-          <button mat-raised-button color="accent" type="submit" >Valider</button>
+          <button mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
       </form>
     </mat-card-header>
   </mat-card>
