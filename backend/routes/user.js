@@ -9,5 +9,6 @@ router.post("/signUp", userController.signUp);
 router.get("/",authorize.checkAuth(['Admin','Freelance']),userController.getUserBySimpleUser);
 router.get("/userTag",userController.getUserByTag);
 router.get("/admin",authorize.checkAuth('Admin'), userController.getUser); //only Admin
+router.get("/:id",userController.getUserId);
 
 export default router;

@@ -1,4 +1,5 @@
 import { createServer } from 'http';
+import 'babel-polyfill';
 import app  from './app';
 
 const normalizePort = val => {

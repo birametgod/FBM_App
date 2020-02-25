@@ -33,6 +33,7 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HomeComponent } from './home/home.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ProfilUserComponent } from './profil-user/profil-user.component';
 
 
 
@@ -42,7 +43,7 @@ const routes: Routes = [
   { path: 'signUp', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchProfilComponent },
-  { path: 'profil', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
+  { path: 'profil/:userId', component: ProfilUserComponent, canActivate: [AuthGuard] },
   { path: 'registration', component: FreelanceRegistrationComponent },
 ];
 
@@ -61,7 +62,8 @@ const routes: Routes = [
     EmailInputComponent,
     LoginComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    ProfilUserComponent
   ],
   imports: [
     BrowserModule,

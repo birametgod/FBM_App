@@ -9,12 +9,12 @@ export function signUp(req, res, next) {
     const user = new User({
       email: req.body.email,
       password: hashPassword,
-      location:req.body.cityId ,
+      location: req.body.cityId,
       competencies: req.body.competenciesId,
       role: req.body.role,
       phoneNumber: req.body.phoneNumber,
-      firstname :req.body.firstname,
-      lastname :req.body.lastname
+      firstname: req.body.firstname,
+      lastname: req.body.lastname
     });
 
     // create my user
@@ -84,26 +84,26 @@ export function loginUser(req, res, next) {
   })
 }
 
-export function getUserByTag(req,res,next) {
+export function getUserByTag(req, res, next) {
   const locationId = req.query.locationId;
   const competenciesId = req.query.competenciesId;
   console.log(req.query)
   User.
-    find({ location : locationId, competencies : {$in : competenciesId}}).
+    find({ location: locationId, competencies: { $in: competenciesId } }).
     populate('location').
     populate('competencies').
-    exec((err,users) => {
-      if(err) return res.status(500).json({message: err.message});
-       const userFetched = users.map(user => {
-         const userFormat = {
-          competencies : user.competencies,
+    exec((err, users) => {
+      if (err) return res.status(500).json({ message: err.message });
+      const userFetched = users.map(user => {
+        const userFormat = {
+          competencies: user.competencies,
           id: user._id,
           email: user.email,
           location: user.location.name,
           role: user.role,
-         }
-         return userFormat;
-       })
+        }
+        return userFormat;
+      })
       return res.status(200).json(userFetched);
     })
 }
@@ -118,6 +118,28 @@ export function getUser(req, res, next) {
     return res.status(200).json(result);
   });
 }
+
+export async function getUserId(req, res, next) {
+  const result = await User.findById(req.params.id).populate('location').populate('competencies');
+  if (!result) {
+    return res.status(500).json({
+      message: "not found "
+    });
+  }
+
+  const resultTransformed = {
+    id: result._id,
+    email: result.email,
+    role: result.role,
+    competencies: result.competencies,
+    location: result.location.name,
+    phoneNumber: result.phoneNumber,
+    firstname: result.firstname,
+    lastname: result.lastname
+  };
+
+  return res.status(200).json(resultTransformed);
+};
 
 export function getUserBySimpleUser(req, res, next) {
   User.find((err, result) => {
