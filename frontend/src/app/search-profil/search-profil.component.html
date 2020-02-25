@@ -13,8 +13,7 @@
         </mat-chip-list>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>AFFICHER</button>
-        <button mat-button>CONTACTER</button>
+        <button mat-button [routerLink]="['/profil', user.id]">AFFICHER</button>
       </mat-card-actions>
     </mat-card>
   </ng-container>

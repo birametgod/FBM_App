@@ -62,6 +62,11 @@ export class UserService {
     );
   }
 
+  getUserId(id: string): Observable<any> {
+    console.log(id);
+    return this.http.get<any>(`http://localhost:3000/api/user/${id}`);
+  }
+
   userLogin(email: string, password: string) {
     const user = {
       email: email,
@@ -147,6 +152,5 @@ export class UserService {
       userId: userId
     };
   }
-
 
 }
