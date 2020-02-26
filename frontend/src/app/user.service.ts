@@ -12,16 +12,23 @@ export class UserService {
 
   token: string;
   idUser: string;
+  isRole: string;
   isAuthenticate = false;
   private userAuthenticate = new Subject<boolean>();
   private myTimer: any;
   private userTagUpdated = new Subject<UserTag[]>();
+  private userRoleUpdated = new Subject<string>();
+
 
   
   constructor(private http: HttpClient, private route: Router) { }
 
   getToken(): string {
     return this.token;
+  }
+
+  getRole(): string {
+    return this.isRole;
   }
 
   getIsAuth(): boolean {
@@ -34,6 +41,10 @@ export class UserService {
 
   getUserAuthenticateListener(): Observable<any> {
     return this.userAuthenticate.asObservable();
+  }
+
+  getIsRoleListener() : Observable<string> {
+    return this.userRoleUpdated.asObservable();
   }
 
   getUserByTag(competencyId: string, locationId: string)  {
@@ -81,13 +92,19 @@ export class UserService {
           if (res.token) {
             this.setTimer(res.expiresIn);
           }
-          this.idUser = res.user;
+          this.idUser = res.user.id;
+          this.isRole = res.user.role;
+          this.userRoleUpdated.next(this.isRole);
           const now = new Date();
           const expireDate = new Date(now.getTime() + res.expiresIn * 1000);
           this.saveAuthData(res.token, expireDate);
           this.isAuthenticate = true;
           this.userAuthenticate.next(true);
-          this.route.navigate(['/']);
+          if (this.isRole == 'Admin') {
+            this.route.navigate(['/admin']);
+          } else {
+            this.route.navigate(['/']);
+          }
         },
         error => {
           this.userAuthenticate.next(false);
@@ -99,6 +116,7 @@ export class UserService {
     localStorage.setItem('token', token);
     localStorage.setItem('expirationDate', expirationDate.toISOString());
     localStorage.setItem('userId', this.idUser);
+    localStorage.setItem('role',this.isRole);
   }
 
   autoUserAuth() {
@@ -112,8 +130,10 @@ export class UserService {
       this.setTimer(expiresIn / 1000);
       this.token = authData.token;
       this.idUser = authData.userId;
+      this.isRole= authData.role;
       this.isAuthenticate = true;
       this.userAuthenticate.next(true);
+      this.userRoleUpdated.next(this.isRole);
     }
   }
 
@@ -126,8 +146,10 @@ export class UserService {
   logout() {
     this.token = null;
     this.idUser = null;
+    this.isRole = null;
     this.isAuthenticate = false;
     this.userAuthenticate.next(false);
+    this.userRoleUpdated.next('');
     clearTimeout(this.myTimer);
     this.clearAuthData();
     this.route.navigate(['/']);
@@ -143,13 +165,15 @@ export class UserService {
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expirationDate');
+    const role = localStorage.getItem('role')
     if (!token || !expirationDate) {
       return;
     }
     return {
       token: token,
       expirationDate: new Date(expirationDate),
-      userId: userId
+      userId: userId,
+      role: role
     };
   }
 

@@ -14,4 +14,15 @@ export class CompetencyService {
   getCompetencies(): Observable<Competency[]>{
     return this.http.get<Competency[]>('http://localhost:3000/api/competency');
   }
+
+  createCompetencies(name:string) {
+    this.http.post<{ message: string; id: string }>('http://localhost:3000/api/competency', {name:name}).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

@@ -20,11 +20,9 @@ export class ProfilUserComponent implements OnInit {
       this.isLoading = true;
       if (paramMap.has('userId')) {
         const userId = paramMap.get('userId');
-        console.log(userId);
         this.userService.getUserId(userId).subscribe(user => {
           this.isLoading = false;
           this.user = user;
-          console.log(user);
         });
       }
     });

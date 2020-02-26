@@ -5,6 +5,9 @@
         <span  fxFlex="95" >
           <a mat-flat-button routerLink="/" >SUPER MALT</a> 
         </span >
+        <span *ngIf="isAdmin()">
+          <a mat-button routerLinkActive="mat-accent" routerLink="/admin">Admin</a>
+        </span>
         <span>
             <a mat-button routerLinkActive="mat-accent">Mon Profil</a>
           </span>

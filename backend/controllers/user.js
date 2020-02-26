@@ -53,14 +53,19 @@ export function loginUser(req, res, next) {
         message: 'email not correct'
       });
     }
-    userFetched = result;
-    _hash.compare(req.body.password, userFetched.password, (err, result) => {
+    userFetched = { 
+      id : result._id,
+      role: result.role,
+    };
+    _hash.compare(req.body.password, result.password, (err, result) => {
       // token creation
-      const token = jwt.sign({ role: userFetched.role, userId: userFetched._id },
+      const token = jwt.sign({ role: userFetched.role, userId: userFetched.id },
         'my_token_secret',
         { expiresIn: '1h' });
+        
 
       if (err) {
+        console.log(err);
         return res.status(401).json({
           message: 'password not correct',
           err: err
@@ -75,7 +80,7 @@ export function loginUser(req, res, next) {
 
       return res.status(200).json({
         message: 'Auth good',
-        user: userFetched._id,
+        user: userFetched,
         token: token,
         expiresIn: 3600
       });
