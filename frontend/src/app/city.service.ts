@@ -13,4 +13,15 @@ export class CityService {
   getCities() : Observable<City[]>{
     return this.http.get<City[]>('http://localhost:3000/api/city');
   }
+
+  createCity(name:string) {
+    this.http.post<{ message: string; id: string }>('http://localhost:3000/api/city', {name:name}).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

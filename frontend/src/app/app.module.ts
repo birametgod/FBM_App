@@ -11,7 +11,6 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule, Routes }   from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
@@ -34,18 +33,11 @@ import { HomeComponent } from './home/home.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './admin/admin.component';
 
 
 
-
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'signUp', component: SignUpComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'search', component: SearchProfilComponent },
-  { path: 'profil/:userId', component: ProfilUserComponent, canActivate: [AuthGuard] },
-  { path: 'registration', component: FreelanceRegistrationComponent },
-];
 
 @NgModule({
   declarations: [
@@ -63,14 +55,14 @@ const routes: Routes = [
     LoginComponent,
     SignUpComponent,
     HomeComponent,
-    ProfilUserComponent
+    ProfilUserComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -85,7 +77,8 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatSelectModule,
     MDBBootstrapModule.forRoot(),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AppRoutingModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
