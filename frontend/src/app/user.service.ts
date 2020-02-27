@@ -18,6 +18,7 @@ export class UserService {
   private myTimer: any;
   private userTagUpdated = new Subject<UserTag[]>();
   private userRoleUpdated = new Subject<string>();
+  private userIdUpdated = new Subject<string>();
 
 
   
@@ -45,6 +46,10 @@ export class UserService {
 
   getIsRoleListener() : Observable<string> {
     return this.userRoleUpdated.asObservable();
+  }
+
+  getIdUserListener(): Observable<string> {
+    return this.userIdUpdated.asObservable();
   }
 
   getUserByTag(competencyId: string, locationId: string)  {
@@ -100,6 +105,7 @@ export class UserService {
           this.saveAuthData(res.token, expireDate);
           this.isAuthenticate = true;
           this.userAuthenticate.next(true);
+          this.userIdUpdated.next(this.idUser);
           if (this.isRole == 'Admin') {
             this.route.navigate(['/admin']);
           } else {
@@ -133,7 +139,6 @@ export class UserService {
       this.isRole= authData.role;
       this.isAuthenticate = true;
       this.userAuthenticate.next(true);
-      this.userRoleUpdated.next(this.isRole);
     }
   }
 
@@ -150,6 +155,7 @@ export class UserService {
     this.isAuthenticate = false;
     this.userAuthenticate.next(false);
     this.userRoleUpdated.next('');
+    this.userIdUpdated.next('');
     clearTimeout(this.myTimer);
     this.clearAuthData();
     this.route.navigate(['/']);

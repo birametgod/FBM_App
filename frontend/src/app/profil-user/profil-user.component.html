@@ -16,7 +16,10 @@
     
       </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="!pathByProfile">
       <button mat-button>Contacter</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="pathByProfile">
+      <button mat-button [routerLink]="['/edit', user.id]" >modifier</button>
     </mat-card-actions>
   </mat-card>

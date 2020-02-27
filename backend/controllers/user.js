@@ -124,6 +124,39 @@ export function getUser(req, res, next) {
   });
 }
 
+export function updateUser(req, res, next)  {
+
+  const user = new User({
+        email: req.params.email,
+        location: req.params.cityId,
+        competencies: req.params.competenciesId,
+        role: req.params.role,
+        phoneNumber: req.params.phoneNumber,
+        firstname: req.params.firstname,
+        lastname: req.params.lastname  
+  });
+  User.updateOne(
+    { _id: req.params.id, email: req.params.email },
+    user,
+    (err, result) => {
+      if (err) {
+        return res.status(404).json({
+          error: err
+        });
+      }
+      console.log(result);
+      if (result.n <= 0) {
+        return res.status(401).json({
+          message: "update failed unauthorized"
+        });
+      }
+      return res.status(200).json({
+        message: "update successfully"
+      });
+    }
+  );
+};
+
 export async function getUserId(req, res, next) {
   const result = await User.findById(req.params.id).populate('location').populate('competencies');
   if (!result) {
@@ -136,11 +169,11 @@ export async function getUserId(req, res, next) {
     id: result._id,
     email: result.email,
     role: result.role,
-    competencies: result.competencies,
-    location: result.location.name,
-    phoneNumber: result.phoneNumber,
-    firstname: result.firstname,
-    lastname: result.lastname
+    competencies: result.competencies ? result.competencies : null,
+    location: result.location ? result.location.name : null,
+    phoneNumber: result.phoneNumber? result.phoneNumber : null,
+    firstname: result.firstname? result.firstname : null,
+    lastname: result.lastname ? result.lastname : null
   };
 
   return res.status(200).json(resultTransformed);

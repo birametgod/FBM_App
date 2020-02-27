@@ -1,7 +1,7 @@
 <mat-card class="example-card">
   <mat-card-header *ngIf="role == 'User'" >
     <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
-      <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
           <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
@@ -35,9 +35,9 @@
       </form>
   </mat-card-header>
 
-    <mat-card-header *ngIf="role=='Freelance'" >
+    <mat-card-header *ngIf="role=='Freelance' || role == 'Admin'" >
       <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
-      <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
           <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
@@ -88,7 +88,8 @@
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
           </div>
-          <button mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'created'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'edit'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >Modifier</button>
       </form>
     </mat-card-header>
   </mat-card>
