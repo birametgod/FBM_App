@@ -92,7 +92,6 @@ export function loginUser(req, res, next) {
 export function getUserByTag(req, res, next) {
   const locationId = req.query.locationId;
   const competenciesId = req.query.competenciesId;
-  console.log(req.query)
   User.
     find({ location: locationId, competencies: { $in: competenciesId } }).
     populate('location').

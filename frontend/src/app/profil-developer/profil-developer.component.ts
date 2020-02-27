@@ -37,7 +37,7 @@ export class ProfilDeveloperComponent implements OnInit {
       lastname: null,
       email: [null, { validators: [Validators.required, Validators.email] }],
       phoneNumber:[null, { validators: [Validators.pattern("^(6|7)?[0-9]{8}$")] }],
-      image:['', { validators: [Validators.required]}, [mimeType]],
+      image:['', {},[mimeType]],
       location: null,
       competencies: [],
       password: [null, { validators: [Validators.required, Validators.minLength(6)] }],
@@ -91,7 +91,6 @@ export class ProfilDeveloperComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
-    this.registrationForm.reset();
     if (this.mode == 'edit') {
       // update user
     } else {
@@ -106,6 +105,7 @@ export class ProfilDeveloperComponent implements OnInit {
           firstname: null,
           lastname: this.registrationForm.value.lastname
         }
+        console.log(user);
         this.userService.addUser(user);
       } else if (this.role == 'Freelance'){
         const user: User = {
@@ -118,9 +118,11 @@ export class ProfilDeveloperComponent implements OnInit {
           firstname: this.registrationForm.value.firstname,
           lastname: this.registrationForm.value.lastname
         }
+        console.log(user);
         this.userService.addUser(user);
       }
     }
+    this.registrationForm.reset();
   }
 
   changePicture() : void {
