@@ -11,7 +11,7 @@ const userSchema = Schema({
     phoneNumber: {type: String},
     role: String,
     file: String,
-    picture: String,
+    imagePath: { type: String, required: true },
     isConnected: Boolean,
     location:{type: Schema.Types.ObjectId, ref: 'City' },
     competencies: [{type: Schema.Types.ObjectId, ref: 'Competency' }]

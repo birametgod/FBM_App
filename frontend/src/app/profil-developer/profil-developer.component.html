@@ -1,7 +1,12 @@
 <mat-card class="example-card">
-  <mat-card-header *ngIf="role == 'User'" >
-    <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
-      <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
+  <mat-card-header *ngIf="role == 'User' || role == 'Admin'" >
+    <button mat-stroked-button type="button" (click)="filePicker.click()">Pick image</button>
+    <!-- <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" > -->
+      <div  class="avatar mx-auto white" *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
+        <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name" class="rounded-circle "  />
+      </div>
+    <!-- </div> -->
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
           <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
@@ -19,7 +24,7 @@
             <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
-          <div id="passwordDiv">
+          <div id="passwordDiv" *ngIf="mode == 'created'">
             <mat-form-field class="example-full-width">
                 <mat-label>Mot de passe</mat-label>
                 <input matInput type="password" placeholder="Mot de passe" formControlName="password"  >
@@ -31,13 +36,18 @@
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
           </div>
-          <button mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'created'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'edit'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >Modifier</button>
       </form>
   </mat-card-header>
 
     <mat-card-header *ngIf="role=='Freelance'" >
-      <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
-      <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
+      <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" > <i *ngIf="!imagePreview && registrationForm.get('image').invalid"> add image</i>
+        <div  class="avatar mx-auto white" *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
+          <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name" class="rounded-circle "  />
+        </div>
+      </div>
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
           <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
@@ -76,19 +86,20 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <div id="passwordDiv">
+          <div id="passwordDiv" *ngIf="mode == 'created'">
             <mat-form-field class="example-full-width">
                 <mat-label>Mot de passe</mat-label>
                 <input matInput type="password" placeholder="Mot de passe" formControlName="password"  >
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" >
                 <mat-label>Confirmation mot de passe</mat-label>
                 <input matInput type="password" placeholder="Confirmation mot de passe" formControlName="confirmationPassword"  >
                 <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
           </div>
-          <button mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'created'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'edit'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >Modifier</button>
       </form>
     </mat-card-header>
   </mat-card>

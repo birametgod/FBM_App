@@ -18,9 +18,10 @@ export class UserService {
   private myTimer: any;
   private userTagUpdated = new Subject<UserTag[]>();
   private userRoleUpdated = new Subject<string>();
+  private userIdUpdated = new Subject<string>();
 
 
-  
+
   constructor(private http: HttpClient, private route: Router) { }
 
   getToken(): string {
@@ -43,15 +44,19 @@ export class UserService {
     return this.userAuthenticate.asObservable();
   }
 
-  getIsRoleListener() : Observable<string> {
+  getIsRoleListener(): Observable<string> {
     return this.userRoleUpdated.asObservable();
   }
 
-  getUserByTag(competencyId: string, locationId: string)  {
+  getIdUserListener(): Observable<string> {
+    return this.userIdUpdated.asObservable();
+  }
+
+  getUserByTag(competencyId: string, locationId: string) {
     const queryParamsRoute = `?locationId=${locationId}&competenciesId=${competencyId}`;
-    return this.http.get<UserTag[]>('http://localhost:3000/api/user/userTag'+ queryParamsRoute).subscribe((values) => {
+    return this.http.get<UserTag[]>('http://localhost:3000/api/user/userTag' + queryParamsRoute).subscribe((values) => {
       this.userTagUpdated.next(values);
-    },error => {
+    }, error => {
       console.log(error);
     })
   }
@@ -59,10 +64,57 @@ export class UserService {
   getUserTagUpdated() {
     return this.userTagUpdated.asObservable();
   }
-  
 
-  addUser(user:User) {
-    this.http.post<{ message: string; result: User }>('http://localhost:3000/api/user/signUp', user).subscribe(
+  updateUser(
+    id: string,
+    email: string,
+    cityId: string,
+    competenciesId: [],
+    phoneNumber: string,
+    firstname: string,
+    lastname: string,
+    image: File | string) {
+      let user: any | FormData;
+      if (typeof image === 'object') {
+        user = new FormData();
+        user.append('email', email );
+        user.append('image', image);
+        user.append('cityId', cityId? cityId : '');
+        user.append('competenciesId',competenciesId? JSON.stringify(competenciesId) : '');
+        user.append('phoneNumber', phoneNumber? phoneNumber : '');
+        user.append('firstname', firstname? firstname : '');
+        user.append('lastname', lastname? lastname : '');
+      } else {
+        user = {
+          email: email,
+          cityId: cityId,
+          competenciesId: competenciesId,
+          phoneNumber: phoneNumber,
+          firstname: firstname,
+          lastname: lastname,
+          imagePath: image
+        }
+      }
+    console.log(user);
+    this.http.put<any>(`http://localhost:3000/api/user/${id}`, user).subscribe(result => {
+    console.log(result);
+    this.route.navigate(['/']);
+    });
+  }
+
+
+  addUser(user: User) {
+    const userData = new FormData();
+    userData.append('email', user.email );
+    userData.append('password', user.password);
+    userData.append('image', user.image);
+    userData.append('cityId', user.cityId ? user.cityId : '');
+    userData.append('competenciesId',user.competenciesId? JSON.stringify(user.competenciesId) : '');
+    userData.append('role', user.role);
+    userData.append('phoneNumber', user.phoneNumber? user.phoneNumber : '');
+    userData.append('firstname', user.firstname? user.firstname : '');
+    userData.append('lastname', user.lastname? user.lastname : '');
+    this.http.post<{ message: string; result: User }>('http://localhost:3000/api/user/signUp', userData).subscribe(
       res => {
         console.log(res);
         this.route.navigate(['/']);
@@ -74,7 +126,6 @@ export class UserService {
   }
 
   getUserId(id: string): Observable<any> {
-    console.log(id);
     return this.http.get<any>(`http://localhost:3000/api/user/${id}`);
   }
 
@@ -84,7 +135,7 @@ export class UserService {
       password: password
     };
     this.http
-      .post<{ message: string; user: any; token: string; expiresIn: number }>( 'http://localhost:3000/api/user/login', user)
+      .post<{ message: string; user: any; token: string; expiresIn: number }>('http://localhost:3000/api/user/login', user)
       .subscribe(
         res => {
           console.log(res);
@@ -100,6 +151,7 @@ export class UserService {
           this.saveAuthData(res.token, expireDate);
           this.isAuthenticate = true;
           this.userAuthenticate.next(true);
+          this.userIdUpdated.next(this.idUser);
           if (this.isRole == 'Admin') {
             this.route.navigate(['/admin']);
           } else {
@@ -116,7 +168,7 @@ export class UserService {
     localStorage.setItem('token', token);
     localStorage.setItem('expirationDate', expirationDate.toISOString());
     localStorage.setItem('userId', this.idUser);
-    localStorage.setItem('role',this.isRole);
+    localStorage.setItem('role', this.isRole);
   }
 
   autoUserAuth() {
@@ -130,10 +182,9 @@ export class UserService {
       this.setTimer(expiresIn / 1000);
       this.token = authData.token;
       this.idUser = authData.userId;
-      this.isRole= authData.role;
+      this.isRole = authData.role;
       this.isAuthenticate = true;
       this.userAuthenticate.next(true);
-      this.userRoleUpdated.next(this.isRole);
     }
   }
 
@@ -150,6 +201,7 @@ export class UserService {
     this.isAuthenticate = false;
     this.userAuthenticate.next(false);
     this.userRoleUpdated.next('');
+    this.userIdUpdated.next('');
     clearTimeout(this.myTimer);
     this.clearAuthData();
     this.route.navigate(['/']);

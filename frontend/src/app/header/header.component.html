@@ -9,7 +9,7 @@
           <a mat-button routerLinkActive="mat-accent" routerLink="/admin">Admin</a>
         </span>
         <span>
-            <a mat-button routerLinkActive="mat-accent">Mon Profil</a>
+            <a mat-button routerLinkActive="mat-accent" [routerLink]="['/profil', userId, {path: 'myProfile'}]">Mon Profil</a>
           </span>
         <span>
           <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Déconnexion</a>
