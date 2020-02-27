@@ -7,4 +7,5 @@ export class User {
   phoneNumber: string;
   firstname: string;
   lastname: string;
+  image: File;
 }

@@ -6,7 +6,11 @@
         <mat-card-title>{{user.email}}</mat-card-title>
         <mat-card-subtitle><i class="fas fa-briefcase"></i> {{user.role}} <i class="fas fa-map-marker-alt"> </i> {{user.location}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="">
+      <img *ngIf="!user.imagePath" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="">
+      <img *ngIf="user.imagePath"
+        class=" shadow-lg p-3 mb-5 bg-white rounded col-md-10  rounded mx-auto d-block"
+        [src]="user.imagePath"
+      />
       <mat-card-content>
         <mat-chip-list aria-label="competence">
           <mat-chip color="warn" selected *ngFor="let item of user.competencies" >{{item.name}}</mat-chip>

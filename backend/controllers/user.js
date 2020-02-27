@@ -3,19 +3,22 @@ import * as _hash from 'bcryptjs';
 import * as jwt from "jsonwebtoken";
 
 export function signUp(req, res, next) {
+  const url = req.protocol + "://" + req.get("host");
   // crypt my password
   _hash.hash(req.body.password, 10, (err, hashPassword) => {
     // if i get error when i hash my password
     const user = new User({
       email: req.body.email,
       password: hashPassword,
-      location: req.body.cityId,
-      competencies: req.body.competenciesId,
+      location: req.body.cityId ?  req.body.cityId : null,
+      competencies: req.body.competenciesId ? JSON.parse(req.body.competenciesId): [],
       role: req.body.role,
-      phoneNumber: req.body.phoneNumber,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname
+      phoneNumber: req.body.phoneNumber? req.body.phoneNumber : null,
+      firstname: req.body.firstname? req.body.firstname : null,
+      lastname: req.body.lastname ? req.body.lastname : null,
+      imagePath: url + "/images/" + req.file.filename,
     });
+
 
     // create my user
     user
@@ -105,6 +108,7 @@ export function getUserByTag(req, res, next) {
           email: user.email,
           location: user.location.name,
           role: user.role,
+          imagePath: user.imagePath ?  user.imagePath : null
         }
         return userFormat;
       })
@@ -125,25 +129,28 @@ export function getUser(req, res, next) {
 
 export function updateUser(req, res, next)  {
 
-  const user = new User({
-        email: req.params.email,
-        location: req.params.cityId,
-        competencies: req.params.competenciesId,
-        role: req.params.role,
-        phoneNumber: req.params.phoneNumber,
-        firstname: req.params.firstname,
-        lastname: req.params.lastname  
-  });
+  let imagePath = req.body.imagePath;
+  if (req.file) {
+    const url = req.protocol + "://" + req.get("host");
+    imagePath = url + "/images/" + req.file.filename;
+  }
   User.updateOne(
-    { _id: req.params.id, email: req.params.email },
-    user,
+    { _id: req.params.id, email: req.body.email },
+    {
+      email: req.body.email,
+      location: req.body.cityId ?  req.body.cityId : null,
+      competencies: req.body.competenciesId ? JSON.parse(req.body.competenciesId): [],
+      phoneNumber: req.body.phoneNumber? req.body.phoneNumber : null,
+      firstname: req.body.firstname? req.body.firstname : null,
+      lastname: req.body.lastname,
+      imagePath: imagePath,
+    },
     (err, result) => {
       if (err) {
         return res.status(404).json({
           error: err
         });
       }
-      console.log(result);
       if (result.n <= 0) {
         return res.status(401).json({
           message: "update failed unauthorized"
@@ -169,10 +176,11 @@ export async function getUserId(req, res, next) {
     email: result.email,
     role: result.role,
     competencies: result.competencies ? result.competencies : null,
-    location: result.location ? result.location.name : null,
+    location: result.location ? result.location : null,
     phoneNumber: result.phoneNumber? result.phoneNumber : null,
     firstname: result.firstname? result.firstname : null,
-    lastname: result.lastname ? result.lastname : null
+    lastname: result.lastname ? result.lastname : null,
+    imagePath: result.imagePath ? result.imagePath : null
   };
 
   return res.status(200).json(resultTransformed);

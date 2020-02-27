@@ -83,7 +83,7 @@ import { ErrorInterceptor } from './error.interceptor';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
-    {provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor ,multi:true},
+    //{provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor ,multi:true},
     AuthGuard
   ],
   bootstrap: [AppComponent]
