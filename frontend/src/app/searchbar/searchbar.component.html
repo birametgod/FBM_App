@@ -1,7 +1,7 @@
-<div flex fxLayout="row">
-    <mat-card id="search-card">
-    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)" style="width:600px !important">
-        <mat-form-field class="search-techno">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+    <mat-card id="search-card" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
+        <mat-form-field class="search-techno" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
             <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une technologie</mat-label> 
             <input matInput placeholder="Ex. Node JS" formControlName="techno" [formControl]="technosControl" [matAutocomplete]="autoTechno">
             <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete" [displayWith]="displayCompetencyName"> 
@@ -11,7 +11,7 @@
             </mat-autocomplete>
         </mat-form-field>
         <br>
-        <mat-form-field class="search-city">
+        <mat-form-field class="search-city" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
             <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Rechercher une ville</mat-label>
             <input matInput type="input" placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="auto">
             <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayCityName">

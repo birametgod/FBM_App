@@ -12,7 +12,8 @@
     height: 100vh !important;
     background-image: url('/assets/images/freelancers.jpeg');
     width: 100vw;
-    position: relative;
+    position: fixed;
     background-size: cover;
     background-repeat: no-repeat;
+    margin-left: -20px;
   }
