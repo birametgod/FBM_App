@@ -134,12 +134,14 @@ export function updateUser(req, res, next)  {
     const url = req.protocol + "://" + req.get("host");
     imagePath = url + "/images/" + req.file.filename;
   }
+  const competenciesId = req.body.competenciesId ? 
+    (typeof(req.body.competenciesId) == 'object' ? req.body.competenciesId : JSON.parse(req.body.competenciesId)) : []
   User.updateOne(
     { _id: req.params.id, email: req.body.email },
     {
       email: req.body.email,
       location: req.body.cityId ?  req.body.cityId : null,
-      competencies: req.body.competenciesId ? JSON.parse(req.body.competenciesId): [],
+      competencies: competenciesId,
       phoneNumber: req.body.phoneNumber? req.body.phoneNumber : null,
       firstname: req.body.firstname? req.body.firstname : null,
       lastname: req.body.lastname,

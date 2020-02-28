@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     this.userService.getIdUserListener().subscribe(idUser => {
       this.userId = idUser;
+      console.log(this.userId);
     });
 
   }
