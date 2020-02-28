@@ -1,9 +1,5 @@
 .search-card {
-    width: 50%;
+    max-width: 500px;
     margin: auto;
     text-align: center;
-}
-
-mat-spinner {
-    margin: auto;
 }

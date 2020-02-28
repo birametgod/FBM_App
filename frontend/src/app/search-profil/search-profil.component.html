@@ -1,9 +1,18 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+  <mat-card>
+    <mat-card-title class="word-break">Filtres</mat-card-title>
+    <mat-checkbox class="example-margin" >Compétence 1</mat-checkbox>
+    <mat-checkbox class="example-margin" >Compétence 2</mat-checkbox>
+    <mat-checkbox class="example-margin" >Compétence 2</mat-checkbox>
+</mat-card>
+</div>
   <ng-container *ngIf="users.length > 0 && !isLoading" >
-    <mat-card class="search-card" *ngFor="let user of users">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+    <mat-card class="search-card" *ngFor="let user of users" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)" >
       <mat-card-header>
         <div mat-card-avatar class="search-header-image"></div>
-        <mat-card-title>{{user.email}}</mat-card-title>
+        <mat-card-title class="word-break"> {{user.email}}</mat-card-title>
         <mat-card-subtitle><i class="fas fa-briefcase"></i> {{user.role}} <i class="fas fa-map-marker-alt"> </i> {{user.location}}</mat-card-subtitle>
       </mat-card-header>
       <img *ngIf="!user.imagePath" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="">
@@ -20,4 +29,5 @@
         <button mat-button [routerLink]="['/profil', user.id]">AFFICHER</button>
       </mat-card-actions>
     </mat-card>
+  </div>
   </ng-container>
