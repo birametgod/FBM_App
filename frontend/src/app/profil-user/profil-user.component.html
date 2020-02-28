@@ -1,5 +1,6 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-card class="search-card" *ngIf="user">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+<mat-card class="search-card" *ngIf="user" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{user.lastname}}</mat-card-title>
@@ -20,3 +21,4 @@
       <button mat-button>Contacter</button>
     </mat-card-actions>
   </mat-card>
+</div>

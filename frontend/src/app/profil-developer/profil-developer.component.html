@@ -1,4 +1,5 @@
-<mat-card class="example-card">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+<mat-card class="example-card" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
   <mat-card-header *ngIf="role == 'User'" >
     <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" ></div>
       <form class="example-form" [formGroup]="registrationForm" (submit)="onSavePost()">
@@ -92,3 +93,4 @@
       </form>
     </mat-card-header>
   </mat-card>
+</div>

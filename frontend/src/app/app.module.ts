@@ -30,11 +30,12 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HomeComponent } from './home/home.component';
-import {MatSelectModule} from '@angular/material/select';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -79,6 +80,7 @@ import { AdminComponent } from './admin/admin.component';
     MDBBootstrapModule.forRoot(),
     MatProgressSpinnerModule,
     AppRoutingModule,
+    MatCheckboxModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},

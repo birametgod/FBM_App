@@ -15,6 +15,13 @@
     font-size: 14px;
   }
 
-    mat-spinner {
-      margin: auto;
-    }
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
