@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 
 
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent implements OnInit {
   form: FormGroup;
   isLoading = false;
   private subs: Subscription;
@@ -31,7 +31,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
       return;
     }
     this.isLoading = true;
-    this.userService.addUser(this.form.value.email, this.form.value.password);
     this.form.reset();
   }
 

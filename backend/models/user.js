@@ -3,14 +3,18 @@ import uniqueValidator from 'mongoose-unique-validator';
 
 
 const userSchema = Schema({
+    firstname: String,
+    lastname: String,
+    competencies: String,
     email: {type: String,required: true, unique: true},
     password: {type: String, required: true},
     phoneNumber: {type: String},
     role: String,
     file: String,
-    picture: String,
+    imagePath: { type: String, required: true },
     isConnected: Boolean,
-    location:String,
+    location:{type: Schema.Types.ObjectId, ref: 'City' },
+    competencies: [{type: Schema.Types.ObjectId, ref: 'Competency' }]
 });
 
 userSchema.plugin(uniqueValidator);

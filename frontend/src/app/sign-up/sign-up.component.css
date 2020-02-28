@@ -4,4 +4,6 @@ mat-form-field {
   mat-spinner {
     margin: auto;
   }
-  
+  mat-card  {
+    margin: auto;
+    }

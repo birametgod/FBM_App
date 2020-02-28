@@ -1,16 +1,18 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-card *ngIf="!isLoading">
+<mat-card style="width:400px !important" *ngIf="!isLoading">
+  <flash-messages></flash-messages>
+
   <form [formGroup]="form" (submit)="onLogin()">
     <div>
-      <mat-form-field class="example-full-width">
-        <input matInput formControlName="email" type="email" placeholder="enter your mail" />
+      <mat-form-field class="example-full-width" style="width:350px !important">
+        <input matInput formControlName="email" type="email" placeholder="Adresse email" />
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field class="example-full-width">
-        <input matInput formControlName="password" type="password" placeholder="password" />
+      <mat-form-field class="example-full-width" style="width:350px !important">
+        <input matInput formControlName="password" type="password" placeholder="Mot de passe" />
       </mat-form-field>
     </div>
-    <button mat-raised-button color="accent">LOGIN</button>
+    <button mat-raised-button color="accent">Connexion</button>
   </form>
 </mat-card>

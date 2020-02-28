@@ -1,0 +1,31 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Creer Compétence</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="compentencyForm" (submit)="onSaveCompetency()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="name">
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+              <button mat-raised-button color="accent" [disabled]="compentencyForm.invalid">Créer</button>
+          </form>    
+      </mat-card-content>    
+</mat-card>
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Creer Ville</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="cityForm" (submit)="onSaveCity()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="name"  >
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+              <button mat-raised-button color="accent" [disabled]="cityForm.invalid" >Créer</button>
+          </form>    
+      </mat-card-content>    
+</mat-card>

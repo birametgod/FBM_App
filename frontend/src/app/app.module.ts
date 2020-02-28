@@ -11,15 +11,14 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule, Routes }   from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmailInputComponent } from './email-input/email-input.component';
 import { MatInputModule } from '@angular/material/input';
 import { SearchbarComponent } from './searchbar/searchbar.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -31,16 +30,18 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HomeComponent } from './home/home.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ProfilUserComponent } from './profil-user/profil-user.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './admin/admin.component';
+import { ErrorInterceptor } from './error.interceptor';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {FlashMessagesModule} from 'angular2-flash-messages';
 
 
 
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'signUp', component: SignUpComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'search', component: SearchProfilComponent },
-  { path: 'profil', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
-];
+
 
 @NgModule({
   declarations: [
@@ -57,14 +58,16 @@ const routes: Routes = [
     EmailInputComponent,
     LoginComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    ProfilUserComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlashMessagesModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -77,10 +80,15 @@ const routes: Routes = [
     MatIconModule,
     MatDividerModule,
     MatAutocompleteModule,
-    MDBBootstrapModule.forRoot()
+    MatSelectModule,
+    MDBBootstrapModule.forRoot(),
+    MatProgressSpinnerModule,
+    AppRoutingModule,
+    MatCheckboxModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
+    //{provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor ,multi:true},
     AuthGuard
   ],
   bootstrap: [AppComponent]

@@ -1,23 +1,26 @@
-<mat-card id="search-card">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+    <mat-card id="search-card" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
     <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
-        <mat-form-field class="search-techno">
-            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une techno</mat-label>
+        <mat-form-field class="search-techno" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
+            <mat-label><mat-icon aria-hidden="false">search</mat-icon> Rechercher une technologie</mat-label> 
             <input matInput placeholder="Ex. Node JS" formControlName="techno" [formControl]="technosControl" [matAutocomplete]="autoTechno">
-            <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete">
-                <mat-option *ngFor="let techno of technosFilteredOptions | async" [value]="techno">
-                    {{techno}}
+            <mat-autocomplete autoActiveFirstOption #autoTechno="matAutocomplete" [displayWith]="displayCompetencyName"> 
+                <mat-option *ngFor="let techno of technosFilteredOptions " [value]="techno">
+                    {{techno.name}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <mat-form-field class="search-city">
+        <br>
+        <mat-form-field class="search-city" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
             <mat-label> <mat-icon aria-hidden="false">place</mat-icon> Rechercher une ville</mat-label>
-            <input matInput placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="autoCity">
-            <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
-                <mat-option *ngFor="let city of citiesFilteredOptions | async" [value]="city">
-                    {{city}}
+            <input matInput type="input" placeholder="Ex. Lyon" formControlName="city" [formControl]="citiesControl" [matAutocomplete]="auto">
+            <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayCityName">
+                <mat-option *ngFor="let city of citiesFilteredOptions" [value]="city">
+                    {{city.name}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit" >Rechercher</button>
+        <button mat-raised-button color="accent" type="submit"><i class="fas fa-search"></i></button>
     </form>
 </mat-card>
+</div>

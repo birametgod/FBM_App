@@ -9,14 +9,20 @@ import { UserService } from './user.service';
 export class AuthGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
   canActivate(
-    next: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const isAuth = this.userService.getIsAuth();
+    const currentUserRole = this.userService.getRole();
     // navigate user to login if he is not authenticated and try to access certain pages
-    if (!isAuth) {
-      this.router.navigate(['/login']);
+    if (isAuth) {
+      if (route.data.roles && route.data.roles.indexOf(currentUserRole) === -1) {
+        this.router.navigate(['/']);
+        return false;
+      }
+      return true;
     }
-    return isAuth;
+    this.router.navigate(['/login']);
+    return false;
   }
   
 }

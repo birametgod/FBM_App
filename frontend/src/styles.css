@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    padding-bottom: 120px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 80px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+mat-spinner {
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  img{
+    max-width: 400px;
+    max-height: 400px;
+    min-width: 200px;
+    min-height: 200px;
+}

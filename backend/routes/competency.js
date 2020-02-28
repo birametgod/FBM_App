@@ -4,7 +4,7 @@ import * as authorize from '../middleware/check-auth';
 
 const router = Router();
 
-router.get("/", authorize.checkAuth(),competency.getCompetencies);
-router.post("/", authorize.checkAuth('Admin'),competency.createCompetencies)
+router.get("/",competency.getCompetencies);
+router.post("/", authorize.checkAuth('Admin'),competency.createCompetencies); //only admin
 
 export default router;

@@ -1,18 +1,27 @@
 .search-card {
-    max-width: 400px;
+  max-width: 240px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
   }
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  .search-header-image {
+    background-image: url('https://www.w3schools.com/howto/img_avatar.png');
     background-size: cover;
   }
 
-  .mat-grid-tile {
-    box-shadow: 1px 1px 1px rgb(184, 184, 184);
-    border: solid 0.1px rgb(184, 184, 184);
-    border-radius: 5px;
-    }
+  .word-break {
+    word-break: break-all;
+    font-size: 14px;
+  }
 
-.mat-grid-tile:hover { 
-        background-color: black;
-    }
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }

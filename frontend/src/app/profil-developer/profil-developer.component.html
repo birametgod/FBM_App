@@ -1,39 +1,107 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <form class="example-form">
+  <flash-messages></flash-messages>
+  <mat-card-header *ngIf="role == 'User' || role == 'Admin'" >
+    
+    <!-- <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" > -->
+      <div  class="avatar mx-auto white" *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
+        <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name" class="rounded-circle "  />
+      </div>
+    <!-- </div> -->
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
+          <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
+          <button><i class="fas fa-image fa-3x" (click)="filePicker.click()"></i></button>
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
-          <input matInput placeholder="Dupont" value="Nom">
+          <input matInput placeholder="Dupont" value="" formControlName="lastname"  >
+          <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Adresse email</mat-label>
+            <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email"  >
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>N° de téléphone</mat-label>
+            <span matPrefix>+33 &nbsp;</span>
+            <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber"  >
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <div id="passwordDiv" *ngIf="mode == 'created'">
+            <mat-form-field class="example-full-width">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" placeholder="Mot de passe" formControlName="password"  >
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Confirmation mot de passe</mat-label>
+                <input matInput type="password" placeholder="Confirmation mot de passe" formControlName="confirmationPassword"  >
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </div>
+          <button *ngIf="mode == 'created'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'edit'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >Modifier</button>
+      </form>
+  </mat-card-header>
+
+    <mat-card-header *ngIf="role=='Freelance'" >
+      <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
+          <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
+          <button class="fas fa-image fa-3x" (click)="filePicker.click()" > <i *ngIf="!imagePreview && registrationForm.get('image').invalid"></i>
+            <div  *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
+              <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name"  />
+            </div>
+          </button>
+        <mat-form-field class="example-full-width">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="Dupont" value="" formControlName="lastname"  >
           <mat-icon matSuffix>mode_edit</mat-icon>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Prénom</mat-label>
-          <input matInput placeholder="Jean" value="Prénom">
+          <input matInput placeholder="Jean" value="" formControlName="firstname"  >
           <mat-icon matSuffix>mode_edit</mat-icon>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="jean.dupont@domaine.com" value="Email">
+            <mat-label>Adresse email</mat-label>
+            <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <mat-label>Telephone</mat-label>
-            <span matPrefix>+336 &nbsp;</span>
-            <input type="tel" matInput placeholder="03946429" value="03946429">
+            <mat-label>N° de téléphone</mat-label>
+            <span matPrefix>+33 &nbsp;</span>
+            <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Selectionner une ville</mat-label>
+            <mat-select formControlName="location"  id="location" [(value)]="citySelected" >
+              <mat-option *ngFor="let city of cities | async" [value]="city.id">
+                  {{city.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" >
+            <mat-label>Selectionner des compétences</mat-label>
+            <mat-select  formControlName="competencies"  id="competencies" [(value)]="competenciesSelected" multiple>
+              <mat-option *ngFor="let competency of competencies | async" [value]="competency.id">
+                {{competency.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div id="passwordDiv" *ngIf="mode == 'created'">
+            <mat-form-field class="example-full-width">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput type="password" placeholder="Mot de passe" formControlName="password"  >
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" >
+                <mat-label>Confirmation mot de passe</mat-label>
+                <input matInput type="password" placeholder="Confirmation mot de passe" formControlName="confirmationPassword"  >
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </div>
+          <button *ngIf="mode == 'created'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >S'inscrire</button>
+          <button *ngIf="mode == 'edit'" mat-raised-button color="accent" [disabled]="registrationForm.invalid" >Modifier</button>
       </form>
     </mat-card-header>
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
   </mat-card>

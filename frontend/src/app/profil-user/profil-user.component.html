@@ -1,0 +1,33 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+<mat-card class="search-card" *ngIf="user" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title><b>{{user.lastname}}</b></mat-card-title>
+      <mat-card-subtitle><b>{{user.firstname}}</b></mat-card-subtitle>
+      <mat-card-subtitle><i>{{user.email}}</i></mat-card-subtitle>
+      <mat-card-subtitle><i class="fas fa-briefcase"></i> {{user.role}}
+        <i class="fas fa-map-marker-alt" > </i>
+        <i *ngIf="user.location">{{user.location.name}}</i>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img
+        class=" shadow-lg p-3 mb-5 bg-white rounded col-md-10  rounded mx-auto d-block"
+        [src]="user.imagePath"
+      />
+    <mat-card-content>
+      <p>
+            <mat-chip-list aria-label="competence">
+              <mat-chip color="warn" selected *ngFor="let item of user.competencies" >{{item.name}}</mat-chip>
+            </mat-chip-list>
+    
+      </p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!pathByProfile">
+      <button mat-button>Contacter</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="pathByProfile">
+      <button mat-button [routerLink]="['/edit', user.id]" >Modifier</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
