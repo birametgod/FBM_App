@@ -1,6 +1,6 @@
 <mat-card class="example-card">
   <mat-card-header *ngIf="role == 'User' || role == 'Admin'" >
-    <button mat-stroked-button type="button" (click)="filePicker.click()">Pick image</button>
+    
     <!-- <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" > -->
       <div  class="avatar mx-auto white" *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
         <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name" class="rounded-circle "  />
@@ -8,18 +8,19 @@
     <!-- </div> -->
       <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
           <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
+          <button><i class="fas fa-image fa-3x" (click)="filePicker.click()"></i></button>
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
           <input matInput placeholder="Dupont" value="" formControlName="lastname"  >
           <mat-icon matSuffix>mode_edit</mat-icon>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
+            <mat-label>Adresse email</mat-label>
             <input matInput placeholder="jean.dupont@domaine.com" value="Email" formControlName="email"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <mat-label>Telephone</mat-label>
+            <mat-label>N° de téléphone</mat-label>
             <span matPrefix>+33 &nbsp;</span>
             <input type="tel" matInput placeholder="0123456789" value="" formControlName="phoneNumber"  >
             <mat-icon matSuffix>mode_edit</mat-icon>
@@ -42,13 +43,13 @@
   </mat-card-header>
 
     <mat-card-header *ngIf="role=='Freelance'" >
-      <div mat-card-avatar class="example-header-image" (click)="filePicker.click()" > <i *ngIf="!imagePreview && registrationForm.get('image').invalid"> add image</i>
-        <div  class="avatar mx-auto white" *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
-          <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name" class="rounded-circle "  />
-        </div>
-      </div>
       <form class="example-form" [formGroup]="registrationForm" (submit)="onSaveUser()">
           <input type='file' id="pictureDeveloper" #filePicker (change)="onImagePicked($event)" />
+          <button class="fas fa-image fa-3x" (click)="filePicker.click()" > <i *ngIf="!imagePreview && registrationForm.get('image').invalid"></i>
+            <div  *ngIf="imagePreview !== '' && imagePreview && registrationForm.get('image').valid">
+              <img mat-card-md-image [src]="imagePreview" [alt]="registrationForm.value.image.name"  />
+            </div>
+          </button>
         <mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
           <input matInput placeholder="Dupont" value="" formControlName="lastname"  >
