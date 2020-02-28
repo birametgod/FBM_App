@@ -3,11 +3,11 @@
 <mat-card class="search-card" *ngIf="user" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{user.lastname}}</mat-card-title>
-      <mat-card-subtitle>{{user.firstname}}</mat-card-subtitle>
-      <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-      <mat-card-subtitle><i class="fas fa-briefcase"></i> {{user.role}} 
-        <i class="fas fa-map-marker-alt" > </i> 
+      <mat-card-title><b>{{user.lastname}}</b></mat-card-title>
+      <mat-card-subtitle><b>{{user.firstname}}</b></mat-card-subtitle>
+      <mat-card-subtitle><i>{{user.email}}</i></mat-card-subtitle>
+      <mat-card-subtitle><i class="fas fa-briefcase"></i> {{user.role}}
+        <i class="fas fa-map-marker-alt" > </i>
         <i *ngIf="user.location">{{user.location.name}}</i>
       </mat-card-subtitle>
     </mat-card-header>
@@ -27,7 +27,7 @@
       <button mat-button>Contacter</button>
     </mat-card-actions>
     <mat-card-actions *ngIf="pathByProfile">
-      <button mat-button [routerLink]="['/edit', user.id]" >modifier</button>
+      <button mat-button [routerLink]="['/edit', user.id]" >Modifier</button>
     </mat-card-actions>
   </mat-card>
 </div>
