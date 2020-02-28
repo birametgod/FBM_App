@@ -9,6 +9,8 @@ import { mimeType } from './mime-type.validator';
 import { UserService } from '../user.service';
 import { User } from '../user';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
+
 
 @Component({
   selector: 'app-profil-developer',
@@ -24,9 +26,10 @@ export class ProfilDeveloperComponent implements OnInit {
   competenciesSelected: String;
   imagePreview: any;
   user;
-  mode:string; 
+  mode:string;
 
   constructor(
+    private flashMessage: FlashMessagesService,
     private cityService: CityService,
     private competencyService: CompetencyService,
     private formBuilder: FormBuilder,
@@ -68,9 +71,9 @@ export class ProfilDeveloperComponent implements OnInit {
             this.registrationForm.get('location').setValidators([Validators.required]);
             this.registrationForm.get('location').updateValueAndValidity();
             this.registrationForm.get('competencies').setValidators([Validators.required]);
-            this.registrationForm.get('competencies').updateValueAndValidity(); 
+            this.registrationForm.get('competencies').updateValueAndValidity();
           }
-          console.log(user);
+
           this.registrationForm.setValue({
             firstname: this.user.firstname,
             lastname: this.user.lastname,
@@ -83,7 +86,7 @@ export class ProfilDeveloperComponent implements OnInit {
             confirmationPassword: ''
           });
           console.log(this.registrationForm);
-        }); 
+        });
       } else {
         this.mode = 'created';
         this.user = null;
@@ -120,7 +123,7 @@ export class ProfilDeveloperComponent implements OnInit {
         this.registrationForm.value.image
         )
     } else {
-      if (this.role == 'User') {
+      if (this.role === 'User') {
         const user: User = {
           email: this.registrationForm.value.email,
           password: this.registrationForm.value.password,
@@ -133,7 +136,8 @@ export class ProfilDeveloperComponent implements OnInit {
           image: this.registrationForm.value.image
         }
         this.userService.addUser(user);
-      } else if (this.role == 'Freelance'){
+        this.showFlashUserSuccesCreated();
+      } else if (this.role === 'Freelance') {
         const user: User = {
           email: this.registrationForm.value.email,
           password: this.registrationForm.value.password,
@@ -146,13 +150,12 @@ export class ProfilDeveloperComponent implements OnInit {
           image: this.registrationForm.value.image
         }
         this.userService.addUser(user);
+        this.showFlashUserSuccesCreated();
       }
     }
     this.registrationForm.reset();
   }
-
-  changePicture() : void {
-    document.getElementById("pictureDeveloper").click();
+  showFlashUserSuccesCreated() {
+    this.flashMessage.show('Félicitation votre compte a été bien créé !', { cssClass: 'alert-success', timeout: 5000 });
   }
-  
 }

@@ -117,7 +117,6 @@ export class UserService {
     this.http.post<{ message: string; result: User }>('http://localhost:3000/api/user/signUp', userData).subscribe(
       res => {
         console.log(res);
-        this.route.navigate(['/']);
       },
       error => {
         this.userAuthenticate.next(false);

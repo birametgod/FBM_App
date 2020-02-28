@@ -37,6 +37,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { ErrorInterceptor } from './error.interceptor';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {FlashMessagesModule} from 'angular2-flash-messages';
+
 
 
 
@@ -63,6 +65,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlashMessagesModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -81,7 +84,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MDBBootstrapModule.forRoot(),
     MatProgressSpinnerModule,
     AppRoutingModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
