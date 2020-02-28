@@ -12,6 +12,7 @@ export class ProfilUserComponent implements OnInit {
 
   isLoading = false;
   user;
+  pathByProfile = false;
 
   constructor(private router: ActivatedRoute, private userService: UserService) { }
 
@@ -19,6 +20,9 @@ export class ProfilUserComponent implements OnInit {
     this.router.paramMap.subscribe((paramMap: ParamMap) => {
       this.isLoading = true;
       if (paramMap.has('userId')) {
+        if (paramMap.has('path')) {
+          this.pathByProfile = true;
+        }
         const userId = paramMap.get('userId');
         this.userService.getUserId(userId).subscribe(user => {
           this.isLoading = false;

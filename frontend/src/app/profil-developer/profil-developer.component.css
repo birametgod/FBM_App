@@ -8,8 +8,7 @@
 
 .example-header-image {
   cursor: pointer;
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+  /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
 }
 
 .example-form {
@@ -24,4 +23,8 @@
 
 #pictureDeveloper{
   display: none;
+}
+
+form {
+  margin-left: 10%;
 }

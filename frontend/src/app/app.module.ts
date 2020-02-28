@@ -35,6 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
+import { ErrorInterceptor } from './error.interceptor';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
@@ -84,6 +85,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor ,multi:true},
+    //{provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor ,multi:true},
     AuthGuard
   ],
   bootstrap: [AppComponent]

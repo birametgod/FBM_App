@@ -9,6 +9,7 @@ import { ProfilUserComponent } from './profil-user/profil-user.component';
 import { FreelanceRegistrationComponent } from './freelance-registration/freelance-registration.component';
 import { AuthGuard } from './auth.guard';
 import { AdminComponent } from './admin/admin.component';
+import { ProfilDeveloperComponent } from './profil-developer/profil-developer.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   { path: 'profil/:userId', component: ProfilUserComponent, canActivate: [AuthGuard] },
   { path: 'registration', component: FreelanceRegistrationComponent },
   { path: 'admin', component: AdminComponent, canActivate:[AuthGuard],data: {roles: ['Admin']} },
+  { path: 'edit/:userId', component: ProfilDeveloperComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
