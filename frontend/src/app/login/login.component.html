@@ -1,5 +1,7 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-card style="width:400px !important" *ngIf="!isLoading">
+  <flash-messages></flash-messages>
+
   <form [formGroup]="form" (submit)="onLogin()">
     <div>
       <mat-form-field class="example-full-width" style="width:350px !important">

@@ -137,7 +137,6 @@ export class UserService {
       .post<{ message: string; user: any; token: string; expiresIn: number }>('http://localhost:3000/api/user/login', user)
       .subscribe(
         res => {
-          console.log(res);
           this.token = res.token;
           if (res.token) {
             this.setTimer(res.expiresIn);
@@ -151,7 +150,7 @@ export class UserService {
           this.isAuthenticate = true;
           this.userAuthenticate.next(true);
           this.userIdUpdated.next(this.idUser);
-          if (this.isRole == 'Admin') {
+          if (this.isRole === 'Admin') {
             this.route.navigate(['/admin']);
           } else {
             this.route.navigate(['/']);
