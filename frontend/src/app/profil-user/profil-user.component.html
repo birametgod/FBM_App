@@ -11,7 +11,8 @@
         <i *ngIf="user.location">{{user.location.name}}</i>
       </mat-card-subtitle>
     </mat-card-header>
-    <img
+      <img *ngIf="!user.imagePath" mat-card-image src="https://assets.entrepreneur.com/content/3x2/2000/20180111134829-freelance-2906725-1920.png" alt="">
+      <img *ngIf="user.imagePath"
         class=" shadow-lg p-3 mb-5 bg-white rounded col-md-10  rounded mx-auto d-block"
         [src]="user.imagePath"
       />

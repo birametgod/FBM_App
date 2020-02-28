@@ -10,6 +10,12 @@
     background-size: cover;
   }
 
+  .imageAvatar{
+    background-size: cover;
+    max-width: 10px;
+    max-height: 10px;
+  }
+
   .word-break {
     word-break: break-all;
     font-size: 14px;
